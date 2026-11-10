@@ -109,7 +109,16 @@ def update_dashboard(selected_route):
     # отсортируйте по дате и создайте px.line. Замените обе строки ниже.
     daily = filtered.groupby("date", as_index=False)['passengers'].sum()
     daily = daily.sort_values("date")
-    line = px.line(daily, x="date", y="passengers")
+    line = px.line(
+        daily,
+        x="date",
+        y="passengers",
+        title = "Пассажиры по дням",
+        labels = {"data": "Дата", "passengers": "Количество пассажиров"},
+        markers=True
+    )
+    line.update_xaxes(title_text="Дата") 
+
 
     # TODO: 7. Сгруппируйте filtered по route, суммируйте passengers
     # и создайте px.bar. Замените обе строки ниже.
